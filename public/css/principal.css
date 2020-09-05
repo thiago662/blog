@@ -29,8 +29,8 @@
     display: block;
     width: 200px;
     height: 20px;
-    color: black;
-    background-color: #FFFFFF;
+    color: #cacaca;
+    background-color: #c942ff;
     text-decoration: none;
     text-align: center;
     margin: 5px;
@@ -39,14 +39,14 @@
   
   .menu a:hover
   {
-    background-color: #b9bcd0;
-    color: #0000ff;
+    background-color: #b700ff;
+    color: #00ff55;
     font-weight: bold;
   }
   
   .menu .active
   {
-    background-color: #c0d4f3;
+    background-color: #b700ff;
   }
   
   
