@@ -29,7 +29,12 @@ php artisan route:list
 
 */
 
-Route::get('produtos', 'MeuControlador@produto');
+Route::get('produtos', function () {
+    return view('outras.produtos');
+})->name('produtos');
+Route::get('departamentos', function () {
+    return view('outras.departamentos');
+})->name('departamentos');
 Route::get('nome', 'MeuControlador@getNome');
 Route::get('idade', 'MeuControlador@getIdade');
 Route::get('multiplicar/{n1}/{n2}', 'MeuControlador@multiplicar');
