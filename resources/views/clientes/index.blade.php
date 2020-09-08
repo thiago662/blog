@@ -1,5 +1,7 @@
 @extends('layouts.principal')
 
+@section('titulo', 'Clientes')
+
 @section('conteudo')
 
 <h3>{{$titulo}}</h3>
@@ -30,6 +32,34 @@
         @endforeach
 
     </ul>
+
+{{--Loops--}}
+
+@for( $i = 0 ; $i < count($clientes) ; $i++ )
+
+    {{ $clientes[$i]['nome'] }}
+
+@endfor
+
+<br>
+
+@foreach ($clientes as $c)
+
+    <p>
+
+        {{ $c['nome'] }}|
+
+        @if($loop->first)
+            (Primeiro)|
+        @endif
+        @if($loop->last)
+            (Ultimo)|
+        @endif
+        ({{ $loop->index }})-{{ $loop->iteration }}/{{ $loop->count }}
+
+    </p>
+        
+@endforeach
 
 @else
 

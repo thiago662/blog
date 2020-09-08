@@ -1,5 +1,8 @@
 @extends('layouts.principal')
 
+{{--Titulo interativo--}}
+@section('titulo', 'Info/'.$cliente['nome'])
+
 @section('conteudo')
 
 <h3>Informações do cliente</h3>

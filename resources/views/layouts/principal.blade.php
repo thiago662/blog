@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device, initial-scale=1">
-        <title>Views</title>
+        {{--titulo interativo--}}
+        <title>@yield('titulo')</title>
         <link rel="stylesheet" href="{{ asset('css/principal.css') }}">
     </head>
     <body>
@@ -13,8 +14,8 @@
                     <ul>
                         {{--Menu com active dinamico--}}
                         <li><a class="{{request()->routeIs('clientes.*') ? 'active':''}}" href="{{route('clientes.index')}}">Clientes</a></li>
-                        <li><a class="{{request()->routeIs('produtos') ? 'active':''}}" href="{{route('produtos')}}">Produtos</a></li>
-                        <li><a class="{{request()->routeIs('departamentos') ? 'active':''}}" href="{{route('departamentos')}}">Departamentos</a></li>
+                        <li><a class="{{request()->routeIs('produtos.*') ? 'active':''}}" href="{{route('produtos')}}">Produtos</a></li>
+                        <li><a class="{{request()->routeIs('departamentos.*') ? 'active':''}}" href="{{route('departamentos')}}">Departamentos</a></li>
                     </ul>
                 </div>
             </div>
