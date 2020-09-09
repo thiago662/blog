@@ -2,3 +2,9 @@ composer update
 copy .env.example .env
 php artisan key:generate
 php artisan serve
+
+-bootstrap
+php artisan preset bootstrap
+npm install
+npm run dev
+npm run dev
