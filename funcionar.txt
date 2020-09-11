@@ -1,5 +1,6 @@
 composer update
 copy .env.example .env
+no mac: cp .env.example .env
 php artisan key:generate
 php artisan serve
 
@@ -8,3 +9,15 @@ php artisan preset bootstrap
 npm install
 npm run dev
 npm run dev
+
+-migrations
+php artisan make:migration create_products --create=products
+//roda as migration
+php artisan migrate
+//volta a migration
+php artisan migrate:rollback
+//migrations existentes e que já foram rodadas
+php artisan migrate:status
+php artisan make:migration add_brand_to_products --table=products
+php artisan make:migration create_departaments --create=departaments
+php artisan make:migration create_product_departament --create=product_departament
