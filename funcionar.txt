@@ -10,6 +10,11 @@ npm install
 npm run dev
 npm run dev
 
+-mysql
+//inicar
+mysql.server start
+mysql -u root -p
+
 -migrations
 php artisan make:migration create_products --create=products
 //roda as migration
@@ -18,6 +23,123 @@ php artisan migrate
 php artisan migrate:rollback
 //migrations existentes e que já foram rodadas
 php artisan migrate:status
+//dá rollback em todos
+php artisan migrate:reset
+//executa o down de todos e depois o up de todos
+php artisan migrate:refresh
+//ele executa o comando drop no banco e depois cria as migrations novamente
+php artisan migrate:refresh
+//apaga e cria tudo novamente
+php artisan migrate:refre
 php artisan make:migration add_brand_to_products --table=products
 php artisan make:migration create_departaments --create=departaments
 php artisan make:migration create_product_departament --create=product_departament
+
+-model
+//criar model de preferencia com letra maiuscula
+php artisan make:model Product
+php artisan make:model Brand
+php artisan make:model Departament
+//criar registro utilizando o tinker
+//todos os comandos utilizados no tinker pode ser colocados no codigo
+php artisan tinker
+use \App\Brand;
+Brand::all()
+$brand = new Brand;
+$brand->name = "Samsung";
+$brand->save()
+Brand::create(["name"=>"Samsung"]);
+//retorn todos
+Brand::all()
+//retorn de id especifico
+Brand::find(1)
+Brand::find([1,2])
+//utilizado para tornor algo de um campo
+Brand::where('id',1)
+Brand::where('id',1)->get()
+Brand::where('id','>',1)->get()
+Brand::where('name',"Samsung")->get()
+//dentro de um intervalo
+Brand::whereBetween('id',[1,3])->get()
+//não esta dentro do intervalo
+Brand::whereNotBetween('id',[0,1])->get()
+//não esta dentro do array
+Brand::whereNotIn('id',[0,1])->get()
+//esta dentro do array
+Brand::whereIn('id',[0,1])->get()
+//utilizando like
+Brand::where('name','like','%e%')->get()
+Brand::where('name','like','%e')->get()
+Brand::where('name','like',"%$name%")->get()
+//consultar mais de um campo
+//returnam um Builser que pode ser utilizado de formas diferentes, podendo encadear
+Brand::where('id','>','1')->where('name',"LG")->get()
+Brand::where('id','>=','3')->orWhere('name',"Samsung")->get()
+//encadeamento complexo
+Brand::where( function($query){ $query->where('id','>',1)->where('id','<',4);})->get()
+Brand::where( function($query){ $query->where('id','>',1)->where('id','<',4);})->where( function($query){ $query->where('name','LG')->orWhere('name','Apple');})->get()
+//odernar
+Brand::orderBy('name')->get()
+Brand::orderBy('name','desc')->get()
+Brand::where('id','>',1)->orderBy('name','desc')->get()
+//all() returna uma collections
+//primeiro elemento
+Brand::all()->first()
+//primeiro ultimo
+Brand::all()->last()
+//inverte a busca
+Brand::all()->reverse()
+//inverte a busca
+Brand::all()->pluck('name')
+//ele retorna uma collection tambem, podendo ser manipulado
+Brand::all()->pluck('name')->first()
+//transforma em array
+Brand::all()->pluck('name')->toArray()
+//transforma em json
+Brand::all()->pluck('name')->toJson()
+Brand::all()->toJson()
+//retorna um aleatorio
+Brand::all()->random()
+//não retorna uma collection
+//media
+Brand::all()->avg('id')
+//maior
+Brand::all()->max('id')
+//menor
+Brand::all()->min('id')
+//soma
+Brand::all()->sum('id')
+//agrupa collections
+Brand::all()->chunk(2)
+//alterar registro
+$brand = Brand::find(2)
+$brand->name = "Lenovo"
+$brand->save()
+//Pode mudar diversos atributos
+$brand->fill(['name'=>'LG'])
+//utilizado where
+Brand::where('id','>',3)->update(['name'=>'LG'])
+Brand::where('id',4)->update(['name'=>'Lenovo'])
+//apagar
+$brand = Brand::find(1)
+$brand->delete()
+Brand::destroy(3)
+Brand::where('id','>',3)->delete()
+//softdelete deleta e não apaga do banco
+$brands = Brand::all();
+$brands[0]
+$brands[0]->delete()
+//retornando todos ate os deletados, retorna um collection
+Brand::withTrashed()
+Brand::withTrashed()->get()
+//verificar valor nulo
+$brands = Brand::withTrashed()->get()
+//retorna um verdadeiro caso tenha sido apagado
+$brands[0]->trashed()
+//retorna todas as deletadas
+$brands = Brand::onlyTrashed()->get()
+//restaurar
+$brands[0]->restore()
+//apagar na base de dedos
+$brands[0]->forceDelete()
+Brand::find(3)->forceDelete()
